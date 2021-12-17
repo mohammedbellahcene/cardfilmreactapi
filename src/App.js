@@ -1,4 +1,4 @@
-import logo from "./logo.svg";
+
 import "./App.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -50,9 +50,11 @@ const App = () => {
 
   return (
     <div className="pageprincipal">
+      <div>bonjour</div>
+
       <div className="pagination"><button onClick={() => setUrl(url1)}>Url upcoming</button><button onClick={() => setUrl(url2)}>Url popular </button><button onClick={() => setUrl(url3)}>Url top rated </button><button onClick={() => !(page > 4) && setPage(page + 1)}>+</button><span>{page}</span><button onClick={() => !(page < 2) && setPage(page - 1)} >-</button></div>
 
-      <div onClick={() => { setOnmodal(false) }} className={onmodal ? "on" : "off"} ><span>{data[position].original_title}</span><img src={!(position === -1) && urlImgPrefix + data[position].backdrop_path} alt="" /></div>
+      <div onClick={() => { setOnmodal(false) }} className={onmodal ? "on" : "off"} ><span className="titre">{data[position].original_title}</span><img src={!(position === -1) && urlImgPrefix + data[position].backdrop_path} alt="" /></div>
       <div className="container">
 
 

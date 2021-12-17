@@ -94,18 +94,36 @@
     
 }
 .on{
-    display:block;
-    width:1000x;
+    display:flex;
+    flex-direction: column;
+    justify-content:start;
+    align-items: center;
+    row-gap: 50px;
+    width:1000px;
     height: 1000px;
     position:fixed;
     top:20%;
     text-align: center;
     font-weight: bold;
     font-size: 1.5rem;
-    color:orangered;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding-top: 30px;
+    
+   
 
 }
 
 .off{
     display:none;
+}
+.titre{
+    display: block;
+   
+
+    color: white;
+}
+.on img{
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
 }
