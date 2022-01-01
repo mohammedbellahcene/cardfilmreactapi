@@ -52,7 +52,7 @@ const App = () => {
     <div className="pageprincipal">
       
 
-      <div className="pagination"><button onClick={() => {setUrl(url1);setPage(1)}}>Url upcoming</button><button onClick={() => {setUrl(url2);setPage(1)}}>Url popular </button><button onClick={() =>{setUrl(url3);setPage(1)} }>Url top rated </button><button onClick={() => !(page > 4) && setPage(page + 1)}>+</button><span>{page}</span><button onClick={() => !(page < 2) && setPage(page - 1)} >-</button></div>
+      <div className="pagination"><h1>Allo Cine</h1><button onClick={() => {setUrl(url1);setPage(1)}}>Url upcoming</button><button onClick={() => {setUrl(url2);setPage(1)}}>Url popular </button><button onClick={() =>{setUrl(url3);setPage(1)} }>Url top rated </button><button onClick={() => !(page > 4) && setPage(page + 1)}>+</button><span>{page}</span><button onClick={() => !(page < 2) && setPage(page - 1)} >-</button></div>
 
       <div onClick={() => { setOnmodal(false) }} className={onmodal ? "on" : "off"} ><span className="close" onClick={() => { setOnmodal(false) }}>X</span><span className="titre">{data[position].original_title}</span><div className="modalimagecontainer"><img src={!(position === -1) && urlImgPrefix + data[position].backdrop_path} alt="" /></div></div>
       <div className="container">
