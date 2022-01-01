@@ -50,11 +50,11 @@ const App = () => {
 
   return (
     <div className="pageprincipal">
-      <div>bonjour</div>
+      
 
-      <div className="pagination"><button onClick={() => setUrl(url1)}>Url upcoming</button><button onClick={() => setUrl(url2)}>Url popular </button><button onClick={() => setUrl(url3)}>Url top rated </button><button onClick={() => !(page > 4) && setPage(page + 1)}>+</button><span>{page}</span><button onClick={() => !(page < 2) && setPage(page - 1)} >-</button></div>
+      <div className="pagination"><button onClick={() => {setUrl(url1);setPage(1)}}>Url upcoming</button><button onClick={() => {setUrl(url2);setPage(1)}}>Url popular </button><button onClick={() =>{setUrl(url3);setPage(1)} }>Url top rated </button><button onClick={() => !(page > 4) && setPage(page + 1)}>+</button><span>{page}</span><button onClick={() => !(page < 2) && setPage(page - 1)} >-</button></div>
 
-      <div onClick={() => { setOnmodal(false) }} className={onmodal ? "on" : "off"} ><span className="titre">{data[position].original_title}</span><img src={!(position === -1) && urlImgPrefix + data[position].backdrop_path} alt="" /></div>
+      <div onClick={() => { setOnmodal(false) }} className={onmodal ? "on" : "off"} ><span className="close" onClick={() => { setOnmodal(false) }}>X</span><span className="titre">{data[position].original_title}</span><div className="modalimagecontainer"><img src={!(position === -1) && urlImgPrefix + data[position].backdrop_path} alt="" /></div></div>
       <div className="container">
 
 
@@ -62,11 +62,11 @@ const App = () => {
         {/* Cette ternaire nous permet de n'afficher data QUE si il est rempli.
       Donc au chargement de la page, pendant 0.5 secondes d'attente de retour de l'appel axios, on affiche "en attente". En bonus, affichez une roue de chargement `a la place de ce "EN ATTENTE" */}
         {data
-          ? data.map((film, i) => {
+          ? data.slice(page*4-4,page*4).map((film, i) => {
             // ne pas oublier d'associer une key à chaque element, meme si ça semble ne pas nous etre utile, sinon react nous sort un warning
             // i représente la position du film courant dans le tableau
 
-            return <div key={i} className="cardfilm" onClick={() => { setOnmodal(true); setPosition(i) }} >
+            return <div key={i} className="cardfilm" onClick={() => { setOnmodal(true); setPosition(i+(page*4-4)) }} >
 
 
               <div className="poster_path"><img src={urlImgPrefix + film.poster_path} alt="" /></div>
@@ -85,7 +85,8 @@ const App = () => {
       </div>
     </div>
 
-  );
+
+);
 };
 
 export default App;
