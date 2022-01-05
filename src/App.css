@@ -18,7 +18,7 @@
     background-color: yellow;
 }
 h1{
-    color:white;
+    
     position:absolute;
     left:20px;
 }
@@ -150,4 +150,11 @@ h1{
 .close:hover{
     cursor:default;
     
+}
+button{
+    font-size: 1.5rem;
+    border-radius: 5px;
+}
+span{
+    font-size: 1.5rem;
 }
