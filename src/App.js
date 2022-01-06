@@ -3,6 +3,8 @@ import "./App.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
+var p;
+var tab=[];
 const App = () => {
   // ce state contiendra toutes les data récupérees par l'appel axios
   const url2 = "https://api-allocine.herokuapp.com/api/movies/popular";
@@ -26,15 +28,15 @@ const App = () => {
     const response = await axios.get(
       url
     );
+    
+    
+    p=response.data.total_pages;
     console.log(
       "DATAS RECUPEREES APRES ATTENTE DU AWAIT:",
-      response.data.results
-    );
-    console.log(
-      "DATAS RECUPEREES APRES ATTENTE DU AWAIT:",
-      response.data.results);
+      response.data.results ,p  );
     setData(response.data.results);
   };
+  
 
   // * * * * * * * USEEFFECT  * * * * * * *
   // useEffect est un hooks fourni par react qui contient 2 arguements : UNE FONCTION A EXECUTER, et UN TABLEAU.
@@ -47,6 +49,9 @@ const App = () => {
     fetchData();
   }, [url]);
   const urlImgPrefix = "https://image.tmdb.org/t/p/w370_and_h556_bestv2";
+  
+ 
+  
 
   return (
     <div className="pageprincipal">
