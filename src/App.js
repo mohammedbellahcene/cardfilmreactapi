@@ -4,7 +4,10 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 var p;
-var tab=[];
+var t;
+
+
+
 const App = () => {
   // ce state contiendra toutes les data récupérees par l'appel axios
   const url2 = "https://api-allocine.herokuapp.com/api/movies/popular";
@@ -15,6 +18,13 @@ const App = () => {
   const [url, setUrl] = useState(url1);
   const [onmodal, setOnmodal] = useState(false)
   const [position, setPosition] = useState(-1)
+  const [upcoming, setUpcomping] = useState(true);
+  const [popular, setPopular] = useState(false);
+  const [topRated, setTopRated] = useState(false);
+  const [tab, setTab] = useState(null);
+  const [pays, setPays] = useState(null);
+ 
+
 
 
 
@@ -28,15 +38,64 @@ const App = () => {
     const response = await axios.get(
       url
     );
+    const response1 = await axios.get(
+      "https://api.covid19api.com/summary"
+    );
     
+
     
+    var a=[];
     p=response.data.total_pages;
+    t=response.data.total_results;
+     var nbpays=response1.data.Countries.length;
+     
     console.log(
       "DATAS RECUPEREES APRES ATTENTE DU AWAIT:",
-      response.data.results ,p  );
+      response.data.results ,p,t,nbpays  );
+      
+      
+      
+   
     setData(response.data.results);
+    setPays(response1.data.Countries);
+     for(var i=1;i<=nbpays;i++)
+
+    {   
+      var t= response1.data.Countries[i].TotalDeaths/response1.data.Countries[i].TotalConfirmed;
+       console.log("Country : ",response1.data.Countries[i].Country," TotalConfirmed : ",response1.data.Countries[i].TotalConfirmed," TotalDeaths : ",response1.data.Countries[i].TotalDeaths," Taux : ",t.toFixed(3))
+    
+      
+    }
+    
   };
+   const getTotalFilms=async ()=> {
+
+      var aux=[] ;
+
+      for(var i=1;i<=p;i++)
+
+        {   
+            const resp=await  axios.get(url+"?p="+i);
+            aux=aux.concat(resp.data.results);
+           
+        
+          
+        }
+           
+        setTab(aux);
   
+   };
+   
+
+   
+  
+  
+  
+   
+   
+  
+
+
 
   // * * * * * * * USEEFFECT  * * * * * * *
   // useEffect est un hooks fourni par react qui contient 2 arguements : UNE FONCTION A EXECUTER, et UN TABLEAU.
@@ -47,10 +106,31 @@ const App = () => {
   // fetchData() => mise A jour du state data => rechargement de la page => fetchData() => mise A jour du state data => rechargement de la page etc ... etc ...
   useEffect(() => {
     fetchData();
+    getTotalFilms();
+    
+    
+   
+   
+
+    
+    
   }, [url]);
   const urlImgPrefix = "https://image.tmdb.org/t/p/w370_and_h556_bestv2";
+
   
+  
+     
  
+ 
+
+
+
+ 
+ 
+ 
+
+
+
   
 
   return (
@@ -58,14 +138,20 @@ const App = () => {
       
 
       <div className="pagination">
-        <h1>Allo Cine</h1>
-        <button onClick={() => {setUrl(url1);setPage(1)}}>upcoming</button>
-        <button onClick={() => {setUrl(url2);setPage(1)}}>popular </button>
-        <button onClick={() =>{setUrl(url3);setPage(1)} }>top rated </button>
-        <button onClick={() => !(page > 4) && setPage(page + 1)}>+</button>
-        <span>{page}</span>
-        <button onClick={() => !(page < 2) && setPage(page - 1)} >-</button>
+        <h1><span className="tel">📞</span> Allo Cine</h1>
+        <button className={upcoming ? "selected":"notselected"} onClick={() => {setUrl(url1);setPage(1);setPopular(false);setTopRated(false);setUpcomping(true)}}>upcoming</button>
+        <button className={popular ? "selected":"notselected"} onClick={() => {setUrl(url2);setPage(1);setPage(1);setPopular(true);setTopRated(false);setUpcomping(false)}}>popular </button>
+        <button className={topRated ? "selected":"notselected"} onClick={() =>{setUrl(url3);setPage(1);setPage(1);setPopular(false);setTopRated(true);setUpcomping(false)} }>top rated </button>
+       
+        
+        
       </div>
+      <div className="pagenumber">
+        <button onClick={() => !(page < 2) && setPage(page - 1)} >&lt;</button>
+        <span>{page}</span>
+        <button  onClick={() => !(page > 4) && setPage(page + 1)}>&gt;</button>
+      </div>
+      
 
       <div onClick={() => { setOnmodal(false) }} className={onmodal ? "on" : "off"} >
         <span className="close" onClick={() => { setOnmodal(false) }}>X</span>
@@ -103,6 +189,7 @@ const App = () => {
 
           })
           : "EN ATTENTE"}
+        
       </div>
     </div>
 
