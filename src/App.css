@@ -163,6 +163,7 @@ button{
    background-color:yellow;
    cursor:pointer;
    color: gray;
+   margin-left: 10px;
 
 }
 button:hover{
