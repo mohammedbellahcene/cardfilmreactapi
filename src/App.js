@@ -139,10 +139,10 @@ const App = () => {
 
       <div className="pagination">
         <h1><span className="tel">📞</span> Allo Cine</h1>
-        <button className={upcoming ? "selected":"notselected"} onClick={() => {setUrl(url1);setPage(1);setPopular(false);setTopRated(false);setUpcomping(true)}}>upcoming</button>
+       <div><button className={upcoming ? "selected":"notselected"} onClick={() => {setUrl(url1);setPage(1);setPopular(false);setTopRated(false);setUpcomping(true)}}>upcoming</button>
         <button className={popular ? "selected":"notselected"} onClick={() => {setUrl(url2);setPage(1);setPage(1);setPopular(true);setTopRated(false);setUpcomping(false)}}>popular </button>
         <button className={topRated ? "selected":"notselected"} onClick={() =>{setUrl(url3);setPage(1);setPage(1);setPopular(false);setTopRated(true);setUpcomping(false)} }>top rated </button>
-       
+       </div> 
         
         
       </div>

@@ -205,3 +205,45 @@ span{
 .pagenumber button:hover{
     color: orangered;
 }
+@media screen and (max-width: 800px){
+    h1{
+    
+        position:static;
+        font-size: 1.5rem;
+        
+        
+    }
+    .pagination{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 150px;
+        font-size: 1.5rem;
+        column-gap: 5px;
+        
+    }
+     button{
+        font-size: 1.5rem;
+       /* border-radius: 5px;*/
+       border: none;
+       background-color:yellow;
+       cursor:pointer;
+       color: gray;
+       margin-left: 15px;
+    
+    }
+    .pagenumber{
+        margin-top: 155px;
+    }
+    .pagenumber button{
+        margin:15px;
+    }
+    .container{
+        margin-top: 5px;
+    }
+    
+}
+    
+
